@@ -20,19 +20,19 @@ public class Main {
 //        frame.pack();
 //        frame.setVisible(true);
 
-        World world = new World(25, 25);
-        Agent agent1 = new Agent("Agent_1", 2, 2, 10, 1, 3);
-        Agent agent2 = new Agent("Agent_2", 10, 10, 10, 2, 2);
+        World world = new World(25);
+        Agent agent1 = new Agent("Agent_1", 2, 2, 10, 1);
+        Agent agent2 = new Agent("Agent_2", 10, 10, 10, 2);
 
         Routine brain1 = Routines.sequence(
-                Routines.moveTo(5, 10),
-                Routines.moveTo(15, 12),
-                Routines.moveTo(2, 4)
+                Routines.work(new World(5)),
+                Routines.work(new World(15)),
+                Routines.work(new World(2))
         );
         agent1.setRoutine(brain1);
 
         Routine brain2 = Routines.sequence(
-                Routines.repeat(Routines.wander(world), 4)
+                Routines.repeat(Routines.work(world), 4)
         );
         agent2.setRoutine(brain2);
 

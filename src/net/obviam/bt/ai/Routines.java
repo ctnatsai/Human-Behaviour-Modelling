@@ -23,8 +23,8 @@ public class Routines {
         return selector;
     }
 
-    public static Routine moveTo(int x, int y) {
-        return new MoveTo(x, y);
+    public static Routine task(int task) {
+        return new Task(task);
     }
 
     public static Routine repeatInfinite(Routine routine) {
@@ -35,12 +35,12 @@ public class Routines {
         return new Repeat(routine, times);
     }
 
-    public static Routine wander(World world) {
-        return new Wander(world);
+    public static Routine work(World world) {
+        return new Work(world);
     }
 
-    public static Routine IsAgentInRange() {
-        return new IsAgentInRange();
+    public static Routine IsAttackVectorDeployed() {
+        return new IsAttackVectorDeployed();
     }
 
 }

@@ -16,7 +16,7 @@ public abstract class Routine {
     protected Routine() { }
 
     public void start() {
-        System.out.println(">>> Starting routine: " + this.getClass().getSimpleName());
+        System.out.println(">>> Starting routine: " + this.getClass().getSimpleName()) ;
         this.state = RoutineState.Running;
     }
 

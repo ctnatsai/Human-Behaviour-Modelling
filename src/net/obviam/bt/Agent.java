@@ -5,8 +5,7 @@ import net.obviam.bt.ai.Routine;
 public class Agent {
 
     final String name;
-    int x;
-    int y;
+    int task;
     int range;
     int damage;
     int health;
@@ -14,10 +13,9 @@ public class Agent {
     Routine routine;
     World world;
 
-    public Agent(String name, int x, int y, int health, int damage, int range) {
+    public Agent(String name, int task, int health, int damage, int range) {
         this.name = name;
-        this.x = x;
-        this.y = y;
+        this.task = task;
         this.health = health;
         this.damage = damage;
         this.range = range;
@@ -31,20 +29,12 @@ public class Agent {
         routine.act(this, world);
     }
 
-    public int getX() {
-        return x;
+    public int getTaskProgress() {
+        return task;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public void setTaskProgress(int task) {
+        this.task = task;
     }
 
     public int getRange() {
@@ -93,13 +83,8 @@ public class Agent {
 
     @Override
     public String toString() {
-        return "Agent{" +
-                "name=" + name +
-                ", x=" + x +
-                ", y=" + y +
-                ", health=" + health +
-                ", range=" + range +
-                ", damage=" + damage +
-                '}';
+        return  "name=" + name +
+                ", performingTaskId=" + task +
+                ", health=" + health;
     }
 }

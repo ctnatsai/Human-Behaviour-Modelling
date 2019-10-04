@@ -5,34 +5,28 @@ import java.util.List;
 
 public class World {
 
-    final int width;
-    final int height;
+    final int tasks;
 
     private List<Agent> agents = new ArrayList<Agent>();
 
-    public World(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public World(int tasks) {
+        this.tasks = tasks;
     }
 
-    public int getWidth() {
-        return width;
+    public int getTasks() {
+        return tasks;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void addDroid(Agent agent) {
-        if (isTileWalkable(agent.getX(), agent.getY())) {
+    public void addAgent(Agent agent) {
+        if (isTaskDoable(agent.getTaskProgress())) {
             agents.add(agent);
             agent.setBoard(this);
         }
     }
 
-    public boolean isTileWalkable(int x, int y) {
+    public boolean isTaskDoable(int task) {
         for (Agent agent : agents) {
-            if (agent.getX() == x && agent.getY() == y) {
+            if (agent.getTaskProgress() == task ) {
                 return false;
             }
         }
