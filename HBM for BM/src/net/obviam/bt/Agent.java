@@ -1,6 +1,6 @@
 package net.obviam.bt;
 
-import net.obviam.bt.ai.Routine;
+import net.obviam.bt.Target_AI.Routine;
 
 public class Agent {
 
@@ -29,6 +29,8 @@ public class Agent {
         routine.act(this, world);
     }
 
+    //getTaskProgress was more or less like saying, agent, get coordinates. To check if not
+    //another agent is occupying the same position that another agent has aspirations of occupying.
     public int getTaskProgress() {
         return task;
     }
@@ -77,7 +79,7 @@ public class Agent {
         return name;
     }
 
-    public void setBoard(World world) {
+    public void setWorld(World world) {
             this.world = world;
      }
 

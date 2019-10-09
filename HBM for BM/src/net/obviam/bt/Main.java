@@ -1,8 +1,8 @@
 package net.obviam.bt;
 
 
-import net.obviam.bt.ai.Routine;
-import net.obviam.bt.ai.Routines;
+import net.obviam.bt.Target_AI.Routine;
+import net.obviam.bt.Target_AI.Routines;
 
 import javax.swing.*;
 
@@ -20,14 +20,14 @@ public class Main {
 //        frame.pack();
 //        frame.setVisible(true);
 
-        World world = new World(25);
+        World world = new World(20, 40, 60);
         Agent agent1 = new Agent("Agent_1", 2, 2, 10, 1);
         Agent agent2 = new Agent("Agent_2", 10, 10, 10, 2);
 
         Routine brain1 = Routines.sequence(
-                Routines.work(new World(5)),
-                Routines.work(new World(15)),
-                Routines.work(new World(2))
+                Routines.work(new World(5,0,0)),
+                Routines.work(new World(15,0,0)),
+                Routines.work(new World(2,0,0))
         );
         agent1.setRoutine(brain1);
 

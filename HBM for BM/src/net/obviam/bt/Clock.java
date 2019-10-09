@@ -17,12 +17,17 @@ public class Clock extends TimerTask {
 
     @Override
     public void run() {
-        if (lifetime >= 0){
-            agent.update();
-            System.out.println(agent);
-            lifetime--;
-        }else {
-            act_lifetime.cancel();
+        //Try running the system.
+        try{
+            if (lifetime >= 0){
+                agent.update();
+                System.out.println(agent);
+                lifetime--;
+            }else {
+                act_lifetime.cancel();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

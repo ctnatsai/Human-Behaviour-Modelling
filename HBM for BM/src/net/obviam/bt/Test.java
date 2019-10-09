@@ -1,20 +1,18 @@
 package net.obviam.bt;
 
-import net.obviam.bt.ai.Repeat;
-import net.obviam.bt.ai.Routine;
-import net.obviam.bt.ai.Routines;
-import net.obviam.bt.ai.Work;
+import net.obviam.bt.Target_AI.Repeat;
+import net.obviam.bt.Target_AI.Routine;
+import net.obviam.bt.Target_AI.Routines;
+import net.obviam.bt.Target_AI.Work;
 
-import java.sql.Time;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Test {
 
     public static void main(String[] args) {
         // Setup
 
-        World world = new World(10);
+        World world = new World(20,40, 60);
         Timer act_duration = new Timer();
         Agent agent = new Agent("MyAgent", 5, 5, 10, 1 );
 
