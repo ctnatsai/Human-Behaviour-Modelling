@@ -29,7 +29,7 @@ public class Task extends Routine {
         }
     }
 
-    private void modifyTask(Agent agent) {//was previously the moveTo task
+    private void modifyTask(Agent agent) {
         if (task != agent.getTaskProgress()) {
             if (task > agent.getTaskProgress()) {
                 agent.setTaskProgress(agent.getTaskProgress() + 1);

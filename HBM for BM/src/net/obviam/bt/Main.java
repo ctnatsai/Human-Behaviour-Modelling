@@ -21,9 +21,9 @@ public class Main {
 //        frame.setVisible(true);
 
         World world = new World(20, 40, 60);
-        Agent agent1 = new Agent("Agent_1", 2, 2, 10, 1);
-        Agent agent2 = new Agent("Agent_2", 10, 10, 10, 2);
-
+        //Agent agent1 = new Agent("Agent_1", 2, 2, 10, 1);
+        //Agent agent2 = new Agent("Agent_2", 10, 10, 10, 2);
+        /*
         Routine brain1 = Routines.sequence(
                 Routines.work(new World(5,0,0)),
                 Routines.work(new World(15,0,0)),
@@ -42,5 +42,24 @@ public class Main {
             agent1.update();
             agent2.update();
         }
+
+        //        Routine scenarioComposition = Routines.repeatInfinite(
+//                Routines.sequence(
+//                        Routines.sequence(
+//                                Routines.developRelationship(
+//                                    Routines.sequence(Routine.establishCommunication()),
+//                                    Routines.sequence(Routine.buildRapport())
+//                                )),
+//                        Routines.sequence(
+//                                Routines.exploitRelationship(
+//                                    Routines.sequence(Routine.primeTarget()),
+//                                    Routines.selector(
+//                                        Routine.agentDisclosesCredentials(),
+//                                        Routine.agentDoesNotDiscloseCredentials()
+//                                ))
+//                        ))
+//        );
+        
+         */
     }
 }

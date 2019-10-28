@@ -4,6 +4,7 @@ import net.obviam.bt.World;
 import net.obviam.bt.Agent;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Work extends Routine {
 
@@ -18,13 +19,13 @@ public class Work extends Routine {
     }
 
     public void reset() {
-        this.task = new Task(random.nextInt(world.getAspirational_opportunities()));
+        this.task = new Task(new Random().nextInt(world.getAspirational_opportunities()));
     }
 
     public Work(World world) {
         super();
         this.world = world;
-        this.task = new Task(random.nextInt(world.getAspirational_opportunities()));
+        this.task = new Task(new Random().nextInt(world.getAspirational_opportunities()));
     }
 
     @Override

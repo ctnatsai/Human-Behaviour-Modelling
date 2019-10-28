@@ -11,6 +11,10 @@ public class World {
     final int aspirational_opportunities;
 
     private List<Agent> social_world = new ArrayList<Agent>();
+    private List<Integer> physical_world = new ArrayList<Integer>();
+
+
+
     private  final int null_opportunities = 0;
 
     public World(int physiological_opportunities, int subsistence_opportunities, int aspirational_opportunities) {
@@ -40,6 +44,13 @@ public class World {
         */
     }
 
+    public void addPhysicalOpportunities(Integer opportunities){
+        physical_world.add(opportunities);
+        for (Agent agent : social_world) {
+            agent.setWorld(this);
+        }
+    }
+
     //This method has to be changed given that task do-ability is not based on whether or not another agent is occupying
     //the same time. This is where this method and the move to method fail for implementation in this case.
     public boolean isTaskDoable(int task) {
@@ -60,4 +71,6 @@ public class World {
     public List<Agent> getSocial_World() {//returns a list of the other agents in the world
         return social_world;
     }
+
+    public List<Integer> getPhysical_world() { return physical_world; }
 }

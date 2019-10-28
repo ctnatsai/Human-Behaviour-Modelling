@@ -1,25 +1,48 @@
 package net.obviam.bt;
 
+import net.obviam.bt.Target_AI.Perception_Interface.Event;
+import net.obviam.bt.Target_AI.Perception_Interface.Memory;
 import net.obviam.bt.Target_AI.Routine;
+import net.obviam.bt.Personality.*;
+
+import java.util.Timer;
 
 public class Agent {
-
+    /*
     final String name;
     int task;
     int range;
     int damage;
     int health;
+    */
+    Memory memory = new Memory();
+    int range =5;
+    int damage = 5;
+    int health= 5;
+    final String actor;
+    int goal;
+    Personality_Composition personality_composition;
+
 
     Routine routine;
     World world;
 
-    public Agent(String name, int task, int health, int damage, int range) {
+    public Agent(String actor, int goal, Personality_Composition personality_composition){
+        this.actor = actor;
+        this.goal = goal;
+        this.personality_composition = personality_composition;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+/*public Agent(String name, int task, int health, int damage, int range) {
         this.name = name;
         this.task = task;
         this.health = health;
         this.damage = damage;
         this.range = range;
-    }
+    }*/
 
     public void update() {
         if (routine.getState() == null) {
@@ -29,14 +52,45 @@ public class Agent {
         routine.act(this, world);
     }
 
-    //getTaskProgress was more or less like saying, agent, get coordinates. To check if not
-    //another agent is occupying the same position that another agent has aspirations of occupying.
-    public int getTaskProgress() {
-        return task;
+    public void start(){
+
+        update();
     }
 
-    public void setTaskProgress(int task) {
-        this.task = task;
+    public Memory getMemory(){
+        return memory;
+    }
+
+    public void updateMemory(int event){
+        this.memory.push(event);
+    }
+
+    public int getGoal() {
+        return goal;
+    }
+
+    public void setGoal(int goal) {
+        this.goal = goal;
+    }
+
+    public Personality_Composition getPersonality_Composition() {
+        return personality_composition;
+    }
+
+    public void setPersonality_Composition(Personality_Composition personality_composition) {
+        this.personality_composition = personality_composition;
+    }
+
+
+    //getTaskProgress was more or less like saying, agent, get coordinates. To check if not
+    //another agent is occupying the same position that another agent has aspirations of occupying.
+
+    public int getTaskProgress() {
+        return goal;
+    }
+
+    public void setTaskProgress(int goal) {
+        this.goal = goal;
     }
 
     public int getRange() {
@@ -76,7 +130,7 @@ public class Agent {
     }
 
     public String getName() {
-        return name;
+        return actor;
     }
 
     public void setWorld(World world) {
@@ -85,8 +139,8 @@ public class Agent {
 
     @Override
     public String toString() {
-        return  "name=" + name +
-                ", performingTaskId=" + task +
-                ", health=" + health;
+        return  "name= " + actor +
+                ", performingTaskId= " + goal +
+                ", personality=" + personality_composition.toString();
     }
 }

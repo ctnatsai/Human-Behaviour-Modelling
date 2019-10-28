@@ -1,76 +1,65 @@
 package net.obviam.bt;
 
-import net.obviam.bt.Target_AI.Repeat;
-import net.obviam.bt.Target_AI.Routine;
-import net.obviam.bt.Target_AI.Routines;
-import net.obviam.bt.Target_AI.Work;
+import net.obviam.bt.Target_AI.*;
+import net.obviam.bt.Personality.*;
 
+import java.util.Random;
 import java.util.Timer;
 
 public class Test {
 
     public static void main(String[] args) {
-        // Setup
+        // Setup world and initialise time
+        World world = new World(2,10, 20);
+        //Calculate personality
+        Personality_Quiz agent_answers = new Personality_Quiz();
+        agent_answers.get_answers();
 
-        World world = new World(20,40, 60);
-        Timer act_duration = new Timer();
-        Agent agent = new Agent("MyAgent", 5, 5, 10, 1 );
-
-        Clock clock = new Clock(act_duration, agent);
-        world.addAgent(agent);
-
-        Routine routine = new Repeat((new Work(world)));
-        agent.setRoutine(routine);
-
-        act_duration.scheduleAtFixedRate(clock, 0, 10);
-        clock.run();
-
-
-
-        /*Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            private int i = 0;
-            @Override
-            public void run() {
-                if (i <= 30){
-                    agent.update();
-                    System.out.println(agent);
-                    i++;
-                }else {
-                    timer.cancel();
-                }
-            }
-        };
-        timer.scheduleAtFixedRate(timerTask, 0, 1);*/
-
-
-/*        for (int i = 0; i < 10; i++) {
-            agent.update();
-            System.out.println(agent);
-        } */
-
-        //---------------------------END------------------------------------------------------------------------------//
-
-
-        //------------------------------------------------------------------------------------------------------------//
-        //---------------------------WORKING PROGRESS CODE------------------------------------------------------------//
-        //------------------------------------------------------------------------------------------------------------//
-
-
-        /* Routine scenarioComposition = Routines.repeatInfinite(
-                Routines.sequence( //Information Disclosure
-                        Routines.sequence(Routines.developRelationship( //Develop Relationship
-                                Routines.sequence(Routine.establishCommunication()),
-                                Routines.sequence(Routine.buildRapport())
-                        )),
-                        Routines.sequence(Routines.exploitRelationship( //Exploit Relationship
-                                Routines.sequence(Routine.primeTarget()),
-                                Routines.selector(
-                                        Routine.agentDisclosesCredentials(),
-                                        Routine.agentDoesNotDiscloseCredentials()
-                                ))
-                        ))
+        Personality_Metrics personality_metrics = new Personality_Metrics(agent_answers);
+        Personality_Composition personality_composition = new Personality_Composition(
+                personality_metrics.is_extrovert_metrics(),
+                personality_metrics.is_agreeable_metrics(),
+                personality_metrics.is_neurotic_metrics(),
+                personality_metrics.is_open_metrics(),
+                personality_metrics.is_conscientious_metrics()
         );
-        */
+
+        //Initialise agent with personality and initial goal.
+        Agent target_agent = new Agent("employee", 20, personality_composition);
+
+
+
+
+        Agent threat_vector = new Agent("social_engineer", 20, personality_composition);
+
+        //Start the clock.
+        Clock clock = new Clock(target_agent, threat_vector);
+        world.addAgent(target_agent);
+        world.addAgent(threat_vector);
+
+        Routine goal_work = Routines.repeatInfinite(
+                Routines.sequence(
+                        Routines.work(world),
+                        Routines.sensor(),
+                        Routines.selector(
+                                Routines.perceive(),
+                                Routines.drinkCoffee(world)
+
+                        )
+                )
+        );
+        target_agent.setRoutine(goal_work);
+
+        Routine goal_deploy_attack_vector = Routines.repeatInfinite(
+                Routines.sequence(
+                        Routines.work(world),
+                        Routines.deployAttackVector(1)
+                )
+        );
+        threat_vector.setRoutine(goal_deploy_attack_vector);
+
+        for (int i = 0; i < 100; i++) {
+            clock.run();
+        }
     }
 }

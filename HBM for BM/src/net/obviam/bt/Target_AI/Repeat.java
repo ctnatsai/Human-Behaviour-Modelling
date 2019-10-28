@@ -39,7 +39,7 @@ public class Repeat extends Routine {
 
     @Override
     public void act(Agent agent, World world) {
-        if (routine.isFailure()) {
+        if(routine.isFailure()) {
             fail();
         } else if (routine.isSuccess()) {
             if (times == 0) {

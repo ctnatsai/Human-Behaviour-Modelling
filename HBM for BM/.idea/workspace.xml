@@ -25,6 +25,9 @@
     <expand />
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="HBM for BM" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -37,15 +40,23 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/net/obviam/bt/Threat_Vector" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\g16m0301\IdeaProjects\HBM for BM\src\com\company" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\g16m0301\IdeaProjects\HBM for BM\src\net\obviam\bt\Threat_Vector" />
       <recent name="C:\Users\g16m0301\IdeaProjects\HBM for BM\src\net\obviam\bt" />
       <recent name="C:\Users\g16m0301\IdeaProjects\HBM for BM\src\com\company" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\g16m0301\IdeaProjects\HBM for BM\src\com\company" />
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.obviam.bt.Target_AI" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="net.obviam.bt.Target_AI" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -88,7 +99,9 @@
       <workItem from="1565339591402" duration="129000" />
       <workItem from="1567515315081" duration="6264000" />
       <workItem from="1569850662968" duration="38043000" />
-      <workItem from="1570529700206" duration="39858000" />
+      <workItem from="1570529700206" duration="148123000" />
+      <workItem from="1571231047979" duration="6034000" />
+      <workItem from="1571749602326" duration="48478000" />
     </task>
     <servers />
   </component>

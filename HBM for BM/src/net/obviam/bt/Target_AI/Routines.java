@@ -1,6 +1,11 @@
 package net.obviam.bt.Target_AI;
 
+
+import net.obviam.bt.Target_AI.Perception.Perceive;
 import net.obviam.bt.World;
+import net.obviam.bt.Target_AI.Perception_Interface.*;
+import net.obviam.bt.Target_AI.Perception.*;
+import net.obviam.bt.Target_AI.DeployAttackVector;
 
 /**
  * Static convenience methods to create routines
@@ -39,15 +44,12 @@ public class Routines {
         return new Work(world);
     }
 
-    public static Routine IsAttackVectorDeployed() {
-        return new IsAttackVectorDeployed();
-    }
+    public static Routine drinkCoffee(World world) { return new DrinkCoffee(world); }
 
-    public static Routine developRelationship(Routine sequence, Routine sequence1) {
-        return Routine.establishCommunication();
-    }
+    public static Routine sensor() { return new Sensor(); }
 
-    public static Routine exploitRelationship(Routine sequence, Routine selector) {
-        return null;
-    }
+    public static Routine perceive() { return new Perceive(); }
+
+    public static Routine deployAttackVector(int attack_vector) { return new DeployAttackVector(attack_vector); }
+
 }

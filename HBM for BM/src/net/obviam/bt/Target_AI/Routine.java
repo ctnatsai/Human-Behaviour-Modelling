@@ -5,26 +5,6 @@ import net.obviam.bt.Agent;
 
 public abstract class Routine {
 
-    public static Routine establishCommunication() {
-        return null;
-    }
-
-    public static Routine buildRapport() {
-        return null;
-    }
-
-    public static Routine primeTarget() {
-        return null;
-    }
-
-    public static Routine agentDisclosesCredentials() {
-        return null;
-    }
-
-    public static Routine agentDoesNotDiscloseCredentials() {
-        return null;
-    }
-
     public enum RoutineState {
         Success,
         Failure,
@@ -69,6 +49,4 @@ public abstract class Routine {
     public RoutineState getState() {
         return state;
     }
-
-
 }
