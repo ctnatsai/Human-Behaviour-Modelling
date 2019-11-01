@@ -1,8 +1,7 @@
 package net.obviam.bt;
 
 
-import net.obviam.bt.Target_AI.Routine;
-import net.obviam.bt.Target_AI.Routines;
+import net.obviam.bt.Behaviour_Tree.*;
 
 import javax.swing.*;
 

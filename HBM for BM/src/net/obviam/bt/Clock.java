@@ -1,13 +1,17 @@
 package net.obviam.bt;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import java.util.TimerTask;
 
-import net.obviam.bt.Target_AI.*;
 
 public class Clock{
-    //use stopwatch for the clock instead
     Agent agent;
     Agent agent1;
+    ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+    public boolean shutdown = false;
 
     public Clock(Agent agent, Agent agent1) {
         this.agent = agent;
@@ -15,12 +19,23 @@ public class Clock{
     }
 
     public void run() {
+        exec.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                // TODO add your code here:
+                while(!shutdown){
+                    agent.update();
+                    agent1.update();
+                    System.out.println(agent);
+                    System.out.println(agent1);
+                }
+            }
+        }, 0, 1, TimeUnit.SECONDS);
         //Try running the system.
-        agent.update();
-        agent1.update();
-        System.out.println(agent);
-        System.out.println(agent1);
-
+    }
+    public void end(){
+        //shutdown = true;
+        System.exit(0);
     }
 
 }

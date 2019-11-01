@@ -1,10 +1,8 @@
 package net.obviam.bt;
 
-import net.obviam.bt.Target_AI.*;
+import net.obviam.bt.Behaviour_Tree.Routine;
+import net.obviam.bt.Behaviour_Tree.Routines;
 import net.obviam.bt.Personality.*;
-
-import java.util.Random;
-import java.util.Timer;
 
 public class Test {
 
