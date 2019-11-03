@@ -1,8 +1,9 @@
 package net.obviam.bt;
 
-import net.obviam.bt.Behaviour_Tree.Routine;
-import net.obviam.bt.Behaviour_Tree.Routines;
-import net.obviam.bt.Personality.*;
+import net.obviam.bt.Agent.*;
+import net.obviam.bt.Agent.Behaviour_Tree.*;
+import net.obviam.bt.Personality_Generator.*;
+import net.obviam.bt.World_Setup.*;
 
 public class Test {
 
@@ -13,7 +14,7 @@ public class Test {
         Personality_Quiz agent_answers = new Personality_Quiz();
         agent_answers.get_answers();
 
-        Personality_Metrics personality_metrics = new Personality_Metrics(agent_answers);
+        Generate_Personality_Metrics personality_metrics = new Generate_Personality_Metrics(agent_answers);
         Personality_Composition personality_composition = new Personality_Composition(
                 personality_metrics.is_extrovert_metrics(),
                 personality_metrics.is_agreeable_metrics(),
@@ -42,7 +43,6 @@ public class Test {
                         Routines.selector(
                                 Routines.perceive(),
                                 Routines.drinkCoffee(world)
-
                         )
                 )
         );

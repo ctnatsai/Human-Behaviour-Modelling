@@ -1,7 +1,8 @@
 package net.obviam.bt;
 
 
-import net.obviam.bt.Behaviour_Tree.*;
+import net.obviam.bt.Agent.Behaviour_Tree.*;
+import net.obviam.bt.World_Setup.*;
 
 import javax.swing.*;
 
