@@ -1,23 +1,18 @@
 package net.obviam.bt.Agent.AI.Perception;
 
 import net.obviam.bt.Agent.*;
-import net.obviam.bt.Agent.Behaviour_Tree.*;
 import net.obviam.bt.Agent.AI.Perception_Interface.*;
 import net.obviam.bt.Agent.AI.Memory.*;
+import net.obviam.bt.Agent.AI.Reason.Reasoner;
 import net.obviam.bt.World_Setup.*;
 
-public class Perceive extends Routine {
+public class Perceive {
     Random_Access_Memory memory = new Random_Access_Memory();
-    Event_Handler eventHandler;
+    Reasoner reasoner = new Reasoner();
     Clock clock;
+    Event event;
 
     public Perceive() { }
-
-
-    @Override
-    public void reset() {
-        start();
-    }
 
     private boolean p_E1_AND_E2(boolean e1, boolean e2){
         return e1 && e2;
@@ -40,23 +35,32 @@ public class Perceive extends Routine {
                         applyThreshold(personality_composition.getConscientiousness())
                 );
             default:
-                return true;
+                return false;
         }
     }
 
-    @Override
-    public void act(Agent agent, World world) {
-        if (memory.equals(null)){
-            fail();
-        }else if (agent.getMemory().size() > 0){
-            if(isTrusting(agent.getPersonality_Composition(), agent.getMemory().peek())) {
-                succeed();
-                System.exit(0);
-            }
-            else{
-                fail();
-                System.exit(0);
-            }
-        }
+    public void perceive(Agent agent, int event) {
+            //The reasoner function is called from this method, all things being equal.
+          if(isTrusting(agent.getPersonality_Composition(), event)){
+              agent.updateMemory(Trust.IS_TRUSTING);
+              printConsoleSuccess(agent);
+              reasoner.getReasoner(agent, agent.getMemory());
+          }
+          else {
+              agent.updateMemory(Trust.IS_NOT_TRUSTING);
+              printConsoleFail(agent);
+              reasoner.getReasoner(agent, agent.getMemory());
+          }
     }
+
+    private void printConsoleSuccess(Agent agent){
+        System.out.println(agent.getActor() +
+                ": Perceives a threat from its current observations");
+    }
+
+    private void printConsoleFail(Agent agent){
+        System.out.println(agent.getActor() +
+                ": Perceives no threat from its current observations");
+    }
+
 }

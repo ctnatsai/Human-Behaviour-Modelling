@@ -1,10 +1,14 @@
 package net.obviam.bt;
 
 
-import net.obviam.bt.Agent.Behaviour_Tree.*;
-import net.obviam.bt.World_Setup.*;
-
-import javax.swing.*;
+        import net.obviam.bt.Agent.Agent;
+        import net.obviam.bt.Agent.Behaviour_Tree.*;
+        import net.obviam.bt.Agent.General_Experiences;
+        import net.obviam.bt.Agent.Personality_Composition;
+        import net.obviam.bt.Personality_Generator.Generate_Personality_Metrics;
+        import net.obviam.bt.Personality_Generator.Personality_Quiz;
+        import net.obviam.bt.World_Setup.*;
+        import javax.swing.*;
 
 public class Main {
     private JPanel panel1;
@@ -20,46 +24,58 @@ public class Main {
 //        frame.pack();
 //        frame.setVisible(true);
 
-        World world = new World(20, 40, 60);
-        //Agent agent1 = new Agent("Agent_1", 2, 2, 10, 1);
-        //Agent agent2 = new Agent("Agent_2", 10, 10, 10, 2);
-        /*
-        Routine brain1 = Routines.sequence(
-                Routines.work(new World(5,0,0)),
-                Routines.work(new World(15,0,0)),
-                Routines.work(new World(2,0,0))
+        // Setup world and initialise time
+        World world = new World(5,10, 20);
+        //Calculate personality
+        Personality_Quiz agent_answers1 = new Personality_Quiz();
+        agent_answers1.get_answers();
+
+        Generate_Personality_Metrics personality_metrics = new Generate_Personality_Metrics(agent_answers1);
+        Personality_Composition personality_composition = new Personality_Composition(
+                personality_metrics.is_extrovert_metrics(),
+                personality_metrics.is_agreeable_metrics(),
+                personality_metrics.is_neurotic_metrics(),
+                personality_metrics.is_open_metrics(),
+                personality_metrics.is_conscientious_metrics()
         );
-        agent1.setRoutine(brain1);
 
-        Routine brain2 = Routines.sequence(
-                Routines.repeat(Routines.work(world), 4)
+        //Initialise agent with personality and initial goal.
+        Agent target_agent1 = new Agent("Employee", 20, personality_composition, new General_Experiences(1));
+        //Print out personality composition of the agent
+        System.out.println(target_agent1.getActor() + ": Big 5 Personality Composition\n" + target_agent1.getPersonality_Composition().toString());
+
+        Agent threat_vector = new Agent("Social" + " Engineer", 20, personality_composition, new General_Experiences(0));
+
+        //Start the clock.
+        Clock clock = new Clock();
+        world.addAgent(target_agent1);
+        world.addAgent(threat_vector);
+
+        Routine goal_work = Routines.repeat(
+                Routines.sequence(
+                        Routines.drinkCoffee(world),
+                        Routines.selector(
+                                Routines.sensor(),
+                                Routines.work(world)
+                        )
+                ), 1
         );
-        agent2.setRoutine(brain2);
+        target_agent1.setRoutine(goal_work);
 
-        for (int i = 0; i < 30; i++) {
-            System.out.println(agent1.toString());
-            System.out.println(agent2.toString());
-            agent1.update();
-            agent2.update();
-        }
+        Routine goal_deploy_attack_vector = Routines.repeat(
+                Routines.sequence(
+                        Routines.work(world),
+                        Routines.deployAttackVector(1)
 
-        //        Routine scenarioComposition = Routines.repeatInfinite(
-//                Routines.sequence(
-//                        Routines.sequence(
-//                                Routines.developRelationship(
-//                                    Routines.sequence(Routine.establishCommunication()),
-//                                    Routines.sequence(Routine.buildRapport())
-//                                )),
-//                        Routines.sequence(
-//                                Routines.exploitRelationship(
-//                                    Routines.sequence(Routine.primeTarget()),
-//                                    Routines.selector(
-//                                        Routine.agentDisclosesCredentials(),
-//                                        Routine.agentDoesNotDiscloseCredentials()
-//                                ))
-//                        ))
-//        );
-        
-         */
+                ), 1
+        );
+        threat_vector.setRoutine(goal_deploy_attack_vector);
+
+        //Beginning of workplace simulation run
+        System.out.println("Start of workplace simulation run-->");
+        clock.execute(target_agent1, threat_vector);
+        //End of workplace simulation run
+        System.out.println("-->End of workplace simulation run");
+
     }
 }

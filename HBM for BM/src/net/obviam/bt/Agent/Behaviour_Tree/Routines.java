@@ -27,8 +27,8 @@ public class Routines {
         return selector;
     }
 
-    public static Routine task(int task) {
-        return new Task(task);
+    public static Routine task(int taskId, String task) {
+        return new Task(taskId, task);
     }
 
     public static Routine repeatInfinite(Routine routine) {
@@ -46,8 +46,6 @@ public class Routines {
     public static Routine drinkCoffee(World world) { return new DrinkCoffee(world); }
 
     public static Routine sensor() { return new Sensor(); }
-
-    public static Routine perceive() { return new Perceive(); }
 
     public static Routine deployAttackVector(int attack_vector) { return new DeployAttackVector(attack_vector); }
 

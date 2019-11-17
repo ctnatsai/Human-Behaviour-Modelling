@@ -67,6 +67,5 @@ public class Sequence extends Routine {
             currentRoutine = routineQueue.poll();
             currentRoutine.start();
         }
-
     }
 }

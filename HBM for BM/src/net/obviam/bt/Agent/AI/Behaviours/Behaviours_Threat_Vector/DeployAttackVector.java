@@ -23,6 +23,12 @@ public class DeployAttackVector extends Routine {
     @Override
     public void act(Agent agent, World world) {
         deployAttackVector(world);
+        printConsoleAction(agent);
         succeed();
+    }
+
+    private void printConsoleAction(Agent agent){
+        System.out.println(agent.getActor() +
+                ": Deploys attack vector");
     }
 }

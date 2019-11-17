@@ -2,12 +2,10 @@ package net.obviam.bt.Agent.AI.Perception_Interface;
 
 import net.obviam.bt.Agent.*;
 import net.obviam.bt.Agent.Behaviour_Tree.*;
-import net.obviam.bt.Agent.AI.Perception.Perceive;
 import net.obviam.bt.World_Setup.*;
 
 
 public class Sensor extends Routine {
-    Perceive perceive = new Perceive();
 
     public Sensor() {}
 
@@ -45,6 +43,7 @@ public class Sensor extends Routine {
     @Override
     public void act(Agent agent, World world) {
         Event_Handler event_handler = new Event_Handler(agent);
+        printConsole(agent);
         if(sensePhysicalWorld(world)){
             updateEventHandler(world, event_handler);
             succeed();
@@ -53,4 +52,10 @@ public class Sensor extends Routine {
             fail();
         }
     }
+
+    private void printConsole(Agent agent){
+        System.out.println(agent.getActor() +
+                ": Is sensing surroundings");
+    }
+
 }

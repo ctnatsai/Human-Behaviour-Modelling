@@ -14,7 +14,6 @@ public class Random_Access_Memory {
 
     public void push(Integer event){
         random_access_memory.push(event);
-        printMemory();
     }
 
     public Integer pop(){

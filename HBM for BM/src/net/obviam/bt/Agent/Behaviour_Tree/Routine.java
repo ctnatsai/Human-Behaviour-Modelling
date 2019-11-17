@@ -4,7 +4,6 @@ import net.obviam.bt.Agent.*;
 import net.obviam.bt.World_Setup.*;
 
 public abstract class Routine {
-
     public enum RoutineState {
         Success,
         Failure,
@@ -16,8 +15,16 @@ public abstract class Routine {
     protected Routine() { }
 
     public void start() {
-        System.out.println(">>> Starting routine: " + this.getClass().getSimpleName()) ;
         this.state = RoutineState.Running;
+        //System.out.println(this.toString(this.state));
+
+        if (!(this.getClass().getSimpleName().equals("Repeat") ||
+                this.getClass().getSimpleName().equals("Selector") ||
+                this.getClass().getSimpleName().equals("Sequence"))){
+            //System.out.println(">>> Starting routine: " + this.getClass().getSimpleName()) ;
+            //System.out.println("Starting" + this.getClass().getSimpleName());
+            return;
+        }
     }
 
     public abstract void reset();
@@ -25,12 +32,12 @@ public abstract class Routine {
     public abstract void act(Agent agent, World world);
 
     protected void succeed() {
-        System.out.println(">>> Routine: " + this.getClass().getSimpleName() + " SUCCEEDED");
+        //System.out.println(">>> Routine: " + this.getClass().getSimpleName() + " SUCCEEDED");
         this.state = RoutineState.Success;
     }
 
     protected void fail() {
-        System.out.println(">>> Routine: " + this.getClass().getSimpleName() + " FAILED");
+        //System.out.println(">>> Routine: " + this.getClass().getSimpleName() + " FAILED");
         this.state = RoutineState.Failure;
     }
 

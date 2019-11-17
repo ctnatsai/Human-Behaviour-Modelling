@@ -5,13 +5,7 @@ import net.obviam.bt.Agent.Behaviour_Tree.*;
 import net.obviam.bt.World_Setup.*;
 
 public class Agent {
-    /*
-    final String name;
-    int task;
-    int range;
-    int damage;
-    int health;
-    */
+
     Random_Access_Memory memory = new Random_Access_Memory();
     int range =5;
     int damage = 5;
@@ -19,15 +13,17 @@ public class Agent {
     final String actor;
     int goal;
     Personality_Composition personality_composition;
+    General_Experiences general_experiences;
 
 
     Routine routine;
     World world;
 
-    public Agent(String actor, int goal, Personality_Composition personality_composition){
+    public Agent(String actor, int goal, Personality_Composition personality_composition, General_Experiences general_experiences){
         this.actor = actor;
         this.goal = goal;
         this.personality_composition = personality_composition;
+        this.general_experiences = general_experiences;
     }
 
     public String getActor() {
@@ -43,8 +39,15 @@ public class Agent {
     }
 
     public void start(){
-
         update();
+    }
+
+    public int getGeneralExperiences() {
+        return general_experiences.getExperience();
+    }
+
+    public void setGeneralExperiences(General_Experiences general_experiences) {
+        this.general_experiences = general_experiences;
     }
 
     public Random_Access_Memory getMemory(){
@@ -70,7 +73,6 @@ public class Agent {
     public void setPersonality_Composition(Personality_Composition personality_composition) {
         this.personality_composition = personality_composition;
     }
-
 
     //getTaskProgress was more or less like saying, agent, get coordinates. To check if not
     //another agent is occupying the same position that another agent has aspirations of occupying.
@@ -129,8 +131,6 @@ public class Agent {
 
     @Override
     public String toString() {
-        return  "name= " + actor +
-                ", performingTaskId= " + goal +
-                ", personality=" + personality_composition.toString();
+        return  "x";
     }
 }

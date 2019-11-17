@@ -7,12 +7,13 @@ import net.obviam.bt.World_Setup.*;
 import java.util.Random;
 
 public class DrinkCoffee extends Routine {
+    private Agent agent;
     private World world;
     private Task task;
 
     public DrinkCoffee(World world) {
         this.world = world;
-        this.task = new Task(new Random().nextInt((world.getPhysiological_opportunities())));
+        this.task = new Task(new Random().nextInt((world.getPhysiological_opportunities())), "Drinking Coffee");
     }
 
     @Override
@@ -22,7 +23,7 @@ public class DrinkCoffee extends Routine {
     }
 
     @Override
-    public void reset() { this.task = new Task(new Random().nextInt(world.getPhysiological_opportunities()));  }
+    public void reset() { this.task = new Task(new Random().nextInt(world.getPhysiological_opportunities()), "Drinking Coffee");  }
 
     @Override
     public void act(Agent agent, World world) {
